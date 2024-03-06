@@ -24,11 +24,11 @@ class PlayerConverter(UserConverter):
             if user.id == i.id:
                 return i
 
-        item = await ItemConverter().convert(ctx, "snowball")
+        item = await ItemConverter().convert(ctx, "frag")
         defaults = user_defaults.copy()
         defaults.get("items", {}).update({item: 1})
         try:
-            del defaults["items"]["snowball"]
+            del defaults["items"]["frag"]
         except KeyError:
             pass
         user = Player(ctx.bot, user.id, defaults)
