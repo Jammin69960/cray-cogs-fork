@@ -8,48 +8,57 @@ user_defaults = {
     "misses": 0,
     "kills": 0,
     "deaths": 0,
-    "items": {"snowball": 1},
+    "items": {"frag": 1},
 }
 
 global_defaults = {
     "items": {
-        "SnowBall": {
+        "Frag": {
             "price": 1000,
             "damage": 10,
             "uses": 1,
             "cooldown": 60,
             "accuracy": 15,
             "throwable": True,
-            "emoji": "❄️",
+            "emoji": "💣",
         },
-        "Frag Grenade": {
+        "WunderWaffle": {
             "price": 2500,
             "damage": 20,
             "uses": 1,
             "cooldown": 60,
             "accuracy": 15,
             "throwable": True,
-            "emoji": "💣",
+            "emoji": "🔫",
         },
         "Ray Gun": {
-            "price": 7500,
+            "price": 5000,
             "damage": 30,
             "uses": 2,
-            "cooldown": 120,
+            "cooldown": 90,
             "accuracy": 20,
+            "throwable": True,
+            "emoji": "🔫",
+        },
+        "VR11": {
+            "price": 7500,
+            "damage": 40,
+            "uses": 3,
+            "cooldown": 120,
+            "accuracy": 10,
             "throwable": True,
             "emoji": "🔫",
         },
         "Scorcher": {
             "price": 10000,
-            "damage": 40,
+            "damage": 50,
             "uses": 3,
-            "cooldown": 150,
+            "cooldown": 120,
             "accuracy": 10,
             "throwable": True,
             "emoji": "🪓",
         },
-        "MedKit": {
+        "Stim": {
             "price": 5000,
             "damage": 40,  # here damage will actually be the amount it can heal.
             "uses": 1,
