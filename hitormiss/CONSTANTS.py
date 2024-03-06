@@ -22,28 +22,28 @@ global_defaults = {
             "throwable": True,
             "emoji": "❄️",
         },
-        "PaintBall Gun": {
+        "Frag Grenade": {
             "price": 2500,
             "damage": 20,
             "uses": 1,
             "cooldown": 60,
             "accuracy": 15,
             "throwable": True,
-            "emoji": "🔫",
+            "emoji": "💣",
         },
-        "Grenade": {
+        "Ray Gun": {
             "price": 7500,
             "damage": 30,
-            "uses": 1,
+            "uses": 2,
             "cooldown": 120,
             "accuracy": 20,
             "throwable": True,
-            "emoji": "💣",
+            "emoji": "🔫",
         },
-        "Axe": {
+        "Scorcher": {
             "price": 10000,
             "damage": 40,
-            "uses": 2,
+            "uses": 3,
             "cooldown": 150,
             "accuracy": 10,
             "throwable": True,
