@@ -214,22 +214,22 @@ class HitOrMiss(commands.Cog):
     async def cog_unload(self):
         await self._unload()
 
-    @commands.command(name="throw")
+    @commands.command(name="attack")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def throw(
+    async def attack(
         self,
         ctx,
         target: Player = commands.parameter(converter=PlayerConverter),
         *,
         item: BaseItem = commands.parameter(converter=ItemConverter),
     ):
-        """Throw an item you own at a user
+        """Attack a user with an item you own
 
-        `item` is the name of the item you want to throw
-        `target` is the user you want to throw the item at"""
+        `item` is the name of the item you want to attack with
+        `target` is the user you want to attack"""
 
         if not item.throwable:
-            return await ctx.send(f"No, a {item} can not be thrown at others.")
+            return await ctx.send(f"No, others can't be attacked with {item}")
         if target.id == ctx.author.id:
             return await ctx.send("Why do you wanna hurt yourself? sadistic much?")
         if target.user.bot:
@@ -237,14 +237,14 @@ class HitOrMiss(commands.Cog):
 
         player = await self.converter.convert(ctx, f"{ctx.author.id}")
         try:
-            result, string = player.throw(ctx.message, target, item)
+            result, string = player.attack(ctx.message, target, item)
             return await ctx.send(string)
         except (ValueError, ItemOnCooldown) as e:
             return await ctx.send(str(e))
         except Exception as e:
-            log.exception("Error occurred in command `throw`: ", exc_info=e)
+            log.exception("Error occurred in command `attack`: ", exc_info=e)
             return await ctx.send(
-                f"An error occurred trying to throw `{item.name}` at `{target.name}`. Check logs for more information."
+                f"An error occurred trying to attack `{item.name}` at `{target.name}`. Check logs for more information."
             )
 
     @commands.command(name="heal")
@@ -407,7 +407,7 @@ class HitOrMiss(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @hom.command(name="createitem", aliases=["make", "create", "newitem", "ci"])
+    @hom.command(name="createitem", aliases=["create-item", "make", "create", "newitem", "ci"])
     @commands.bot_has_permissions(embed_links=True)
     @commands.is_owner()
     async def hom_create(self, ctx: commands.Context):
@@ -485,7 +485,7 @@ class HitOrMiss(commands.Cog):
             + "\n".join([f"`{k}`: **{v}**" for k, v in answers.items()])
         )
 
-    @hom.command(name="deleteitem", aliases=["remove", "delete", "di"])
+    @hom.command(name="deleteitem", aliases=["delete-item", "del", "remove", "delete", "di"])
     @commands.is_owner()
     async def hom_delete(
         self, ctx: commands.Context, item: BaseItem = commands.parameter(converter=ItemConverter)
@@ -513,14 +513,14 @@ class HitOrMiss(commands.Cog):
     async def hom_lb(
         self,
         ctx: commands.Context,
-        _type: Literal["kills", "throws", "deaths", "hits", "misses", "kdr", "all"] = "kills",
+        _type: Literal["kills", "attacks", "deaths", "hits", "misses", "kdr", "all"] = "kills",
         global_or_local: Union[Literal["global", "local"], bool] = False,
     ):
         """
         Show the top players in the Hit Or Miss leaderboard.
 
         There are 6 ways learderboards can be sorted:
-        - **Throws**: The leaderboard shows the top players who threw the most items.
+        - **Attacks**: The leaderboard shows the top players who attacked with the most items.
         - **Kills**: The amount of kills users have. (default)
         - **Deaths**: The amount of times users have died.
         - **Hits**: The amount of times users have hit others.
@@ -535,7 +535,7 @@ class HitOrMiss(commands.Cog):
         """
         if _type.lower() not in lb_types and _type.lower() != "all":
             return await ctx.send(
-                "Invalid type. Valid types are `throws`, `kills`, `deaths`, `hits`, `misses`, `kdr` or `all`."
+                "Invalid type. Valid types are `attacks`, `kills`, `deaths`, `hits`, `misses`, `kdr` or `all`."
             )
 
         final = []
