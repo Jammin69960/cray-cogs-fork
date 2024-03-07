@@ -154,15 +154,15 @@ class Player:
                 other.deaths += 1
                 return (
                     True,
-                    f"You threw {item} at {other} and luck had it, that they got killed by it. You got all of the items they had.",
+                    f"You attacked {other} with {item} and luck had it, that they got killed by it. You got all of the items they had.",
                 )
             return (
                 True,
-                f"You threw {item} at {other} and they took {damage} damage. They now have {ohp} hp.",
+                f"You attacked {other} with {item} and they took {damage} damage. They now have {ohp} hp.",
             )
 
         self.misses += 1
-        return (False, f"You threw {item} at {other} but you couldn't hit them.")
+        return (False, f"You attacked {other} with {item} but you couldn't hit them.")
 
     @property
     def stats(self):
@@ -174,7 +174,7 @@ class Player:
         return (  # The docstring messed up the view on discord mobile ughhh
             f"Health Points (hp): **{self.hp}**\n\n"
             f"Accuracy: **{self.accuracy}**\n\n"
-            f"Total Throws: **{self.throws}**\n\n"
+            f"Total Attacks: **{self.attacks}**\n\n"
             f"Total Hits: **{self.hits}**\n\n"
             f"Total Misses: **{self.misses}**\n\n"
             f"Total Kills: **{self.kills}**\n\n"
@@ -192,7 +192,7 @@ class Player:
         """
         A property that shows if a player is new or not.
         This is for filtering purposes in the leaderboard."""
-        return not self.throws  # if they haven't thrown yet, they are new.
+        return not self.attacks  # if they haven't thrown yet, they are new.
 
 
 class Inventory:
