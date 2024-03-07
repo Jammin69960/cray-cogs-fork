@@ -82,7 +82,7 @@ class Player:
         self.inv = Inventory(self, data.get("items", {}))
         self.hp: int = data.get("hp", 100)
         self.accuracy = data.get("accuracy", 10)
-        self.throws = data.get("throws", 0)
+        self.attacks = data.get("attacks", 0)
         self.hits = data.get("hits", 0)
         self.misses = data.get("misses", 0)
         self.kills = data.get("kills", 0)
@@ -102,7 +102,7 @@ class Player:
         return {
             "hp": self.hp,
             "accuracy": self.accuracy,
-            "throws": self.throws,
+            "attacks": self.attacks,
             "hits": self.hits,
             "misses": self.misses,
             "kills": self.kills,
@@ -127,14 +127,14 @@ class Player:
 
         return self.hp
 
-    def throw(self, message: discord.Message, other: "Player", item: BaseItem):
+    def attack(self, message: discord.Message, other: "Player", item: BaseItem):
         if not self.inv.get(item.name):
             raise ValueError(f"You don't have a {item.name}")
 
         item._handle_usage(
             message, self
         )  # let the exceptions raise. The command gonna handle those.
-        self.throws += 1
+        self.attacks += 1
 
         if true_random() <= (item.damage + self.accuracy + (true_random() / 3)):
             self.hits += 1
