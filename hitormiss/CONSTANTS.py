@@ -3,7 +3,7 @@ from typing import Optional
 user_defaults = {
     "hp": 100,
     "accuracy": 10,
-    "throws": 0,
+    "attacks": 0,
     "hits": 0,
     "misses": 0,
     "kills": 0,
@@ -80,4 +80,4 @@ dc_fields = [
     ("emoji", Optional[str]),
 ]
 
-lb_types = ["throws", "kills", "deaths", "hits", "misses", "kdr"]
+lb_types = ["attacks", "kills", "deaths", "hits", "misses", "kdr"]
